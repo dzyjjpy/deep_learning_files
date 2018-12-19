@@ -1,0 +1,137 @@
+
+1.安装ubuntu操作系统16.04
+  提前安装好win10操作系统，提前做好ubuntu的启动u盘
+  关闭win10下电源的启动的快速启动(推荐)，去掉勾选，否则安装时会出问题
+  启动时注意按F2进入BIOS，查看启动顺序，进入F7查看高级设置
+  重启按F8,确认启动顺序，无比从不带UEFI的U盘进行启动，否则可能win10无法引导进入
+
+2.安装Nvidia显卡驱动
+  上Nvidia官网查看对应显卡的驱动版本
+  可以通过三种方式进行安装(PPA源、software update、sh编译安装)
+  推荐PPA源安装方式，1060和1080Ti都是通过此种方式安装成功（）详见安装步骤
+  这一步是最麻烦的，可能会重装n多次ubuntu系统
+  也可能出现ubuntu循环登陆的情况，附录有解决方案）
+  
+  安装成功后，可在显卡驱动中，输入
+  nvidia-smi
+  如果可以看到显卡信息，则证明驱动安装成功
+
+3.安装python版本管理工具
+  通常可以使用pyenv管理python版本，进行版本切换。
+  通常有三种方法进行python的版本管理，也可以使用conda、或者自带的venv进行版本管理。
+  pyenv global 3.6.3 #	切换python的版本至3.6.3，
+  切换后pip也会相应切换，不用担心pip版本和python版本不匹配的问题
+  pyenv global system # 通常切回系统默认的版本，为2.7.12
+
+4.安装pyenv virtualenv
+  使用virtualenv来隔离不同项目的工作环境。
+（Python3.3以上的版本通过venv模块原生支持虚拟环境，可以代替Python之前的virtualenv）
+  virtualenv本身是一个独立的工具，用户可以不使用pyenv单独使用virtualenv。
+  但是，如果你使用了pyenv，就需要安装pyenv-virtualenv插件而不是virtualenv软件来使用virtualenv的功能。
+
+  4.1安装pyenv virtualenv插件
+  git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+  eval "$(pyenv virtualenv-init -)"  # 把以下内容添加到~/.bashrc
+  source ~/.bashrc   
+  pyenv help virtualenv
+
+  4.2使用pyenv virtualenv创建多个不同的工作环境
+  pyenv virtualenv 3.6.3 first_project  # 创建虚拟工作环境
+  pyenv virtualenvs                     # 查看所有的虚拟工作项目环境
+  pyenv activate first_project          # 激活某一个虚拟环境
+  pip install ...                       # 在虚拟环境下安装项目所需的python环境,如安装tf_cpu
+  pyenv deactivate                      # 退出虚拟环境
+
+5. 安装CUDA
+	到Nvidia官网下载CUDA的安装包，直接下载runfile(local)文件
+	通常有三种方法安装CUDA，分开安装驱动和cuda，同时安装驱动和cuda，如果前两种不行，啃呢过跟内核版本有关
+    采用分开安装驱动和cuda的方式，前面已经成功安装Nvidia的显卡驱动
+ 	通过对.run文件执行sh指令，完成安装
+	sudo sh cuda_9.0.176_384.81_linux.run # 注意cuda.run注意替换成自己的文件的名字
+	然后用一本书的书角压住回车键，直到服务条款显示到100%。接着按下面的步骤选择：
+
+	accept
+	n（不要安装driver）
+	y
+	y
+	y
+	安装完成后，设置环境变量。
+打开主目录下的 .bashrc文件添加如下路径，例如我的.bashrc文件在/home/wangyuanwei下，如果没有找到，则按Ctrl+H键显示隐藏文件。
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-8.0/lib64
+export PATH=$PATH:/usr/local/cuda-8.0/bin
+export CUDA_HOME=$CUDA_HOME:/usr/local/cuda-8.0
+终端运行：source ~/.bashrc
+检查：nvcc --version，如果显示下面的文子就说明安装成功了. （要设置环境变量后，才能通过使用此指令查询）
+PS： cuda的安装会比较快，特别注意不要安装驱动
+	cuda8.0有两部分，需要先成功安装第一部分后再安装第二部分
+
+6.CuDnn安装
+	解压下载到的cudnn文件夹，从当前目录打开终端，执行以下指令
+   （其实也可以手动拷贝到制定目录下，c语言将头文件和库文件放到include和lib64下）
+	sudo cp cuda/include/cudnn.h /usr/local/cuda/include/
+	sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/
+	sudo chmod a+r /usr/local/cuda/include/cudnn.h
+	sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
+	
+    通过以下指令查看是否安装成功，如看到显示版本信息，则安装成功
+	cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+
+7.其他依赖环境配置
+	tf安装各版本配套关系：https://blog.csdn.net/wanzhen4330/article/details/81660277
+	tensorflow_gpu-1.4.0 GPU
+	python2.7, 3.3-3.6
+	GCC 4.8
+	Bazel 0.5.4
+	cudnn: 6
+	cuda: 8
+
+	7.1gcc降级
+		4.8版本可以直接通过以下方式进行安装
+		sudo apt-get install gcc-4.8  # 安装gcc的版本
+		gcc --version	  # 查看当前的gcc版本
+ 		ls /usr/bin/gcc*  # 查看所有的gcc版本
+		sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 100 # 设置优先级
+		sudo update-alternatives --config gcc
+
+	7.2bazel安装
+	step1：在bazel-0.5.4-installer-linux-x86_64.sh所在目录下依次执行如下命令
+	sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python   #安装依赖
+	chmod +x bazel-0.5.4-installer-linux-x86_64.sh   #增加执行权限
+	sudo ./bazel-0.5.4-installer-linux-x86_64.sh --user   #安装      
+	# The --user flag installs Bazel to the $HOME/bin(当前用户主目录/bin) 
+	# directory on your system and sets the .bazelrc path to $HOME/.bazelrc.
+
+	step2：执行命令
+	sudo gedit ~/.bashrc   #打开当前用户的配置文件
+	在打开的文件末尾添加
+	export PATH="$PATH:$HOME/bin"
+	#source /root/.bazel/bin/bazel-complete.bash # 可能会有权限的问题，有些教程没有这句，先注释掉
+	保存并退出文件，执行命令
+	source ~/.bashrc   #使配置文件立即生效
+	注：如果您想要使Bazel对所有用户都可用，请对/etc/profile这个配置文件进行和上面相同的操作。
+	
+	step3：测试是否安装成功
+	bazel version
+	如果成功显示bazel的版本信息，则安装成功
+
+8.安装tf_GPU (!!!一定要注意tf-gpu的版本号，要与cuda和cudnn版本能够对应)
+	pip install tensorflow-gpu==1.4
+	否则版本不匹配，可能会出现以下错误：
+	ImportError: libcublas.so.9.0: cannot open shared object file: No such file or directory
+	Failed to load the native TensorFlow runtime.
+	
+9.PyTorch安装
+	直接上pytorch官网，根据版本选择安装指令即可，如linux、gpu cuda8.0、pip安装、python3.6
+	pip3 install https://download.pytorch.org/whl/cu80/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
+	pip3 install torchvision
+	
+10. jupyter notebook安装(便于交互式调试、及训练可视化等)
+	pip install --upgrade pip //更新pip
+	pip install jupyter
+	jupyter-notebook
+	sudo apt install jupyter-notebook
+
+
+
+
