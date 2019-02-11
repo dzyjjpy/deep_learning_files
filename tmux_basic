@@ -1,0 +1,13 @@
+
+tmux   # 进入后台运行，防止服务器断连接后运行程序中止
+
+tmux at -t demo  # 进入demo session
+
+ctrl + b -> 输入d   # 退出tmux
+
+tmux ls # 查看tmux列表
+
+tmux new -s demo  # 进入tmux new session
+
+run.sh  # 执行程序
+运行在后台的程序不能显示，cannot connnect to X server localhost
