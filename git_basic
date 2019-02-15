@@ -1,0 +1,45 @@
+创建Git代码仓库方法
+1. 在目录中创建新仓库，git init
+    $ mkdir learngit
+    $ cd learngit
+    $ git init
+2. 如果Git项目已经存在，使用git clone从远程服务器复制一份出来，Git支持多种协议
+    $ git clone mobgit@134.32.51.60:learngit.git  #使用SSH传输协议
+    $ git clone git://134.32.51.60/learngit.git  #使用Git传输协议
+    $ git clone https://134.32.51.60/learngit.git  #使用HTTPS传输协议
+    
+3.检查当前文件状态
+    git status
+
+4.使用git add命令开始跟踪一个新文件(或者将本次修改提交到暂存区)
+    git add
+
+5.提交更新
+    使用git commit命令将暂存区的内容提交至版本库
+    git commit -m "my first commit"
+    务必要使用-m参数加入注释，描述本次提交具体做了什么
+    如果觉得使用暂存区过于繁琐，可以在commit时直接使用-a参数
+    Git会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过git add
+  
+6.查看历史
+    使用git log命令可以查看历史记录
+    
+7.远程仓库
+    上面是一些本地仓库的操作，当和被人协作开发某些项目时，需要至少使用一个
+    远程仓库，以便推送或拉取数据，分享各自的工作进展。
+
+8.克隆远程库
+    git clone + SSH协议、Git传输协议、HTTPS协议
+
+9.查看绑定的远程库
+    如果使用我们使用git clone命令海子街克隆了一个远程仓库到本机，Git就已经默认
+    绑定了一个名为origin的远程库。当然我们还可以手工绑定其它远程库，可以有很多个
+    使用git remote -v命令累出我们绑定了哪些远程库
+    $ git remote -v
+
+10.使用git remote show origin查看origin远程库的更详细的信息
+    $ git remote show origin
+
+手动添加一个远程仓库
+    
+    
