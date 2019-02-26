@@ -1,7 +1,7 @@
 python环境管理可以通过多种方式
 pyenv、anaconda、virtualenv(python自带)
 
-python自带的虚拟环境管理方法如下：
+一、python自带的虚拟环境管理方法如下：
 
 $ virtualenv ENV --python=python2.7  # 创建虚拟环境
 
@@ -15,6 +15,17 @@ $ jupyter notebook (--ip=113.106.88.100 --port=8080)  # 如果要打开服务器
 $ deactivate # 退出虚拟环境
 
 
-pyvirtualenv方式
+二、pyvirtualenv方式
+
+$ pyenv virtualenv 2.7.12 first_project　　#创建虚拟工作环境
+
+$ pyenv virtualenvs         # 查看所有虚拟工作环境
+
+$ pyenv activate first_project    #　激活虚拟环境
+
+$ pip install ...      #　进入虚拟环境安装特定版本ｐｙｔｈｏｎ、ｔｆ、ｔｏｒｃｈ等
+
+$ pyenv deactivate 　  ＃　退出虚拟环境
+
 
 anaconda方式
