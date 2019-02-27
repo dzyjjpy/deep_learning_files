@@ -44,6 +44,7 @@
 
 5. 安装CUDA
 	到Nvidia官网下载CUDA的安装包，直接下载runfile(local)文件
+	下载链接：　https://developer.nvidia.com/cuda-toolkit-archive
 	通常有三种方法安装CUDA，分开安装驱动和cuda，同时安装驱动和cuda，如果前两种不行，啃呢过跟内核版本有关
     采用分开安装驱动和cuda的方式，前面已经成功安装Nvidia的显卡驱动
  	通过对.run文件执行sh指令，完成安装
@@ -56,7 +57,7 @@
 	y
 	y
 	安装完成后，设置环境变量。
-打开主目录下的 .bashrc文件添加如下路径，例如我的.bashrc文件在/home/wangyuanwei下，如果没有找到，则按Ctrl+H键显示隐藏文件。
+打开主目录下的 .bashrc文件添加如下路径，例如我的.bashrc文件在/home/jiapy下，如果没有找到，则按Ctrl+H键显示隐藏文件。
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-8.0/lib64
 export PATH=$PATH:/usr/local/cuda-8.0/bin
