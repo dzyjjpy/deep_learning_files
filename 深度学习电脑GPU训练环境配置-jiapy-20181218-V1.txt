@@ -86,6 +86,13 @@ PS： cuda的安装会比较快，特别注意不要安装驱动
 	Bazel 0.5.4
 	cudnn: 6
 	cuda: 8
+	
+	tensorflow_gpu-1.８.0 GPU
+	python　3.５-3.6
+	GCC 4.8
+	Bazel 0.5.4
+	cudnn: ７
+	cuda: ９．０（９．１）
 
 	7.1gcc降级
 		4.8版本可以直接通过以下方式进行安装
