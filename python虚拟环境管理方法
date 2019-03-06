@@ -28,4 +28,18 @@ $ pip install ...      #　进入虚拟环境安装特定版本ｐｙｔｈｏ�
 $ pyenv deactivate 　  ＃　退出虚拟环境
 
 
-anaconda方式
+三、anaconda方式
+
+$ conda env list   # 查看存在哪些python虚拟环境
+$ conda create -n your_env_name python=X.X(2.7, 3.6)   # 创建某个python版本的虚拟环境，your_env_name文件可在Anaconda安装目录envs文件下找到
+
+$ source activate your_env_name    # linux下激活python虚拟环境
+$ source deactivate  # linux 退出python虚拟环境
+
+$ source activate your_env_name    # windows下激活python虚拟环境
+$ deactivate  # windows退出python虚拟环境
+
+$ conda install -n your_env_name [package]  # 安装package到your_env_name中
+$ conda remove -n your_env_name(虚拟环境名称) --all # 删除某个虚拟环境
+$ conda remove --name $your_env_name  $package_name  # 删除环境中某个包
+
