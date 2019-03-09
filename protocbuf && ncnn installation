@@ -46,5 +46,6 @@ Protocbuf version is really important for later framework installation. E.g. ncn
 # (1) uninstall protocol buffer and install, Link: https://www.cnblogs.com/darkknightzh/p/5782992.html
 # (2) install 3.5.0 version's protocbuf, Link: https://blog.csdn.net/FK2016/article/details/83375048
 # (3) gcc upgrade and downgrade, Link: https://blog.csdn.net/betty13006159467/article/details/78394974
+                                       https://blog.csdn.net/jiangjiang_jian/article/details/80694799
 
 
