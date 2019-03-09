@@ -1,1 +1,45 @@
+0.introduction
+All key steps to compiling protobuf(in order to install tencent ncnn, caffe, ...)
+Protocbuf version is really important for later framework installation. E.g. ncnn requires 2.6.2 or higher protobuf
+
+1. protobuf compiling installation
+1.1 display protocbuf
+  $ protoc --version # display protocbuf version
+  $ which protoc  # find the protoc directory
+
+1.2 uninstall existing protocbuf version
+  $ which protoc  # find the protoc directory
+  $ rm /usr/local/bin/protoc  # remove the installation package
+  $ sudo apt-get remove libprotobuf-dev  # uninstall system's protobuf
+
+1.3 download protobuf
+  Download Link: https://github.com/google/protobuf/releases ##Source code (zip)##
+  PS: recommend to download .tar.gz file, including ./configure file and no need to generate by ./autogen.sh command
+  unpack the package, then cd to the directory
+  $ cd protobuf
+  $ ./autogen.sh   # if installation package is zip file, need to generate configure file, might fail as network block
+                   # need to mannually download googletest package,  then unpack it, put it into gtest or googletest  
+                   #file in build directory.
+  $ ./configure (--prefix=/usr)   # --prefix=/usr/..., put googletest files into directory, then ./autogen.sh again
+  $ make
+  $ make check     # protoc version, must match, pay attention to: ln -s source/dir  des/dir
+                   # ISSUES happened: protobuf compiler version 3.7 doesn't match library version 3.5.0
+                   # finally solved by compiling 3.5.0 protoc
+
+  $ sudo make install  # libtool mismatch error, recreate aclocal.m4 with macros from libtool 2.4.6
+                       # python virtual env: $ conda deactivate
+
+2. ncnn compiling installation steps
+  Link:  https://github.com/Tencent/ncnn/wiki/
+  $ cd <ncnn-root-dir>
+  $ mkdir -p build
+  $ cd build
+  $ cmake ..    # protocbuf version , pay attention to warning, it would be better if no warning
+  $ make -j4    # issue: undefined references, gcc version might need to upgrade(5.5 test ok)
+                # issue: compiling and ensure protobuf version
+
+# (1) uninstall protocol buffer and install, Link: https://www.cnblogs.com/darkknightzh/p/5782992.html
+# (2) install 3.5.0 version's protocbuf, Link: https://blog.csdn.net/FK2016/article/details/83375048
+# (3) gcc upgrade and downgrade, Link: https://blog.csdn.net/betty13006159467/article/details/78394974
+
 
