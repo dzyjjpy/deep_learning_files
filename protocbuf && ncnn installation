@@ -1,8 +1,10 @@
 0.introduction
+
 All key steps to compiling protobuf(in order to install tencent ncnn, caffe, ...)
 Protocbuf version is really important for later framework installation. E.g. ncnn requires 2.6.2 or higher protobuf
 
 1. protobuf compiling installation
+
 1.1 display protocbuf
   $ protoc --version # display protocbuf version
   $ which protoc  # find the protoc directory
@@ -16,10 +18,12 @@ Protocbuf version is really important for later framework installation. E.g. ncn
   Download Link: https://github.com/google/protobuf/releases ##Source code (zip)##
   PS: recommend to download .tar.gz file, including ./configure file and no need to generate by ./autogen.sh command
   unpack the package, then cd to the directory
+  
   $ cd protobuf
   $ ./autogen.sh   # if installation package is zip file, need to generate configure file, might fail as network block
                    # need to mannually download googletest package,  then unpack it, put it into gtest or googletest  
                    #file in build directory.
+                   
   $ ./configure (--prefix=/usr)   # --prefix=/usr/..., put googletest files into directory, then ./autogen.sh again
   $ make
   $ make check     # protoc version, must match, pay attention to: ln -s source/dir  des/dir
@@ -31,6 +35,7 @@ Protocbuf version is really important for later framework installation. E.g. ncn
 
 2. ncnn compiling installation steps
   Link:  https://github.com/Tencent/ncnn/wiki/
+  
   $ cd <ncnn-root-dir>
   $ mkdir -p build
   $ cd build
