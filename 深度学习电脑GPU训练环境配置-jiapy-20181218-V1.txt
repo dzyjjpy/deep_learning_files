@@ -8,7 +8,8 @@
 2.安装Nvidia显卡驱动
   上Nvidia官网查看对应显卡的驱动版本
   可以通过三种方式进行安装(PPA源、software update、sh编译安装)
-  推荐PPA源安装方式，1060和1080Ti都是通过此种方式安装成功,详见安装步骤
+  推荐PPA源安装方式，1060和1080Ti都是通过此种方式安装成功,详见安装步骤:
+  https://blog.csdn.net/ghw15221836342/article/details/79571559
   这一步是最麻烦的，可能会重装n多次ubuntu系统
   也可能出现ubuntu循环登陆的情况，附录有解决方案）
   
