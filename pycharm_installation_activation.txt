@@ -1,0 +1,36 @@
+Steps for pycharm installation and activation
+
+0. Download pycharm 
+    
+    $ download pycharm professional version in official website
+
+1. Installation
+
+    $ sudo tar -zxvf pycharm-professional-*.tar.gz
+
+    $ cd pycharm*.tar.gz/bin
+
+    $ sudo sh pycharm.sh
+
+    $ don't import settings
+
+2. Activation
+    
+    $ open link: http://idea.lanyus.com/
+    
+    $ generate activation code
+
+    $ sudo gedit /etc/hosts
+      add following lines at last: 
+          0.0.0.0 account.jetbrains.com
+          0.0.0.0 www.jetbrains.com
+    $ cope the code to activate pycharm
+
+3. Test
+    create a new project and test.py to test pycharm
+    print("hello pycharm\n")
+
+
+Reference:
+1. https://blog.csdn.net/mr__lqy/article/details/82952765
+2. generate activation code:  http://idea.lanyus.com/
