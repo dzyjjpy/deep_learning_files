@@ -134,8 +134,12 @@ PS： cuda的安装会比较快，特别注意不要安装驱动
 	直接上pytorch官网，根据版本选择安装指令即可，如linux、gpu cuda8.0、pip安装、python3.6
 	pip3 install https://download.pytorch.org/whl/cu80/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
 	pip3 install torchvision
+
+10.caffe编译安装
+        Link： https://www.cnblogs.com/go-better/p/7161006.html
+	Ubuntu16.04 14.04安装配置Caffe(GPU版)，可直接参考上述链接，亲测有效
 	
-10. jupyter notebook安装(便于交互式调试、及训练可视化等)
+11. jupyter notebook安装(便于交互式调试、及训练可视化等)
 	pip install --upgrade pip //更新pip
 	pip install jupyter
 	jupyter-notebook
