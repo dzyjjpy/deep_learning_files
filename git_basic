@@ -21,12 +21,18 @@
     如果觉得使用暂存区过于繁琐，可以在commit时直接使用-a参数
     Git会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过git add
   
-6.查看历史
-    使用git log命令可以查看历史记录
+6.查看
+    git log  #使用git log命令可以查看历史记录
+    git log --pretty=oneline # 按行查看
+    git branch #查看分支
+    git branch -a # 查看所有分支
+    git branch -r # 查看远程分支
+    
     
 7.远程仓库
     上面是一些本地仓库的操作，当和被人协作开发某些项目时，需要至少使用一个
     远程仓库，以便推送或拉取数据，分享各自的工作进展。
+    git checkout -b branch_name origin_branchname # 本地创建远程分支并切换到该分支
 
 8.克隆远程库
     git clone + SSH协议、Git传输协议、HTTPS协议
@@ -39,6 +45,11 @@
 
 10.使用git remote show origin查看origin远程库的更详细的信息
     $ git remote show origin
+    
+11.版本回退
+    git reset --hard HEAD^  # 回退到上一个版本
+    git reset --hard commit_id # 回退到制定id的版本
+    git reflog  # 查看每一次命令记录，便于恢复相对于当前将来的版本
 
 手动添加一个远程仓库
     
