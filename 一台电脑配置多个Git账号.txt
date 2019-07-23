@@ -1,0 +1,38 @@
+一台电脑同事存放多个git账户多个rsa秘钥
+用途：一台电脑可以同时关联github, gitlab, gitlab@company如git@192.168.1.237公司的gitlab
+
+解决方式：通过多次生成id_rsa及id_rsa.pub两个文件（~/.ssh/目录下），重新修改文件名，在目录下新建config文件配置identity路径
+一台电脑配置多个git账号
+  1. ssh-keygen -t rsa -C "youremail.com"  # github: dzyjjpy@126.com  gitlab:dzyjjpy@126.com git@192.168.1.237: jiapy@cloudream.com
+  2. 一直回车，生成id_rsa及id_rsa.pub两个文件
+  3. 进入github账户setting选项SSH and GPG keys，把复制的公钥字符串粘贴里面的key输入框中，保存退出即可
+  4. ssh -T git@github.com  #通过终端ssh测试可知，出现如下提示内容，说明秘钥已经生成且添加成功
+  5. 修改id_rsa及id_rsa.pub两个文件的文件名为： e.g. id_rsa_github及id_rsa_github.pub
+  6. 在/.ssh/目录下新建 config文件，重复步骤4-6， 最终config文件内容如下:
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile  /home/jiapy/.ssh/id_rsa_github
+
+Host github.com
+  HostName gitlab.com
+  User git
+  IdentityFile  /home/jiapy/.ssh/id_rsa_gitlabdzyjjpy
+
+Host github.com
+  HostName gitlab.com
+  User git
+  IdentityFile  /home/jiapy/.ssh/id_rsa_gitlab_237
+  
+常见错误：
+1.git添加公钥后报错sign_and_send_pubkey: signing failed: agent refused operation的解决办法
+在命令行终端执行：
+  eval "$(ssh-agent -s)"
+  ssh-add
+2.注意检查config文件中，文件名或路径是否有非法字符，e.g. 空格等
+3.Permission denied（publickey）
+切换一个终端再试试，有时候需要等一下； 两个终端结果不一致有出现过； 
+4. 237服务器要使用 ssh -T git@192.168.1.237
+    如果直接使用192.168.1.237, 会一直让输入密码
+
